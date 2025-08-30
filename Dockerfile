@@ -1,5 +1,5 @@
 # --- Этап сборки ---
-FROM maven:3.9.2-amazoncorretto-21 AS build
+FROM amazoncorretto:21
 WORKDIR /app
 
 COPY pom.xml .
