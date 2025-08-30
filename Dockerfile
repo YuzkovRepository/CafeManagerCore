@@ -1,14 +1,13 @@
-# Используем официальный образ OpenJDK 17
-FROM openjdk:17-jdk-slim
-
-# Указываем рабочую директорию в контейнере
+# Этап сборки
+FROM maven:3.9.2-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Копируем файлы проекта в контейнер
-COPY target/*.jar app.jar
-
-# Указываем переменную окружения для порта
-ENV PORT=8080
-
-# Команда для запуска Spring Boot приложения
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Этап запуска
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+ENV PORT=${PORT}
+ENTRYPOINT ["java","-jar","app.jar"]
