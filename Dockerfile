@@ -1,7 +1,8 @@
-FROM eclipse-temurin:21-jdk-jammy AS build
+FROM maven:3.8.6-eclipse-temurin-21 AS build
 WORKDIR /app
-COPY . .
-RUN ./mvnw clean package -DskipTests
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
