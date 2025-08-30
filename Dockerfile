@@ -1,13 +1,13 @@
-# Этап сборки
-FROM maven:3.9.2-eclipse-temurin-17 AS build
-WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+# Используем OpenJDK 17
+FROM openjdk:17-jdk-slim
 
-# Этап запуска
-FROM eclipse-temurin:17-jdk
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+
+# Копируем готовый jar
+COPY target/cafemanager-0.0.1-SNAPSHOT.jar app.jar
+
+# Переменная порта
 ENV PORT=${PORT}
+
+# Запуск приложения
 ENTRYPOINT ["java","-jar","app.jar"]
