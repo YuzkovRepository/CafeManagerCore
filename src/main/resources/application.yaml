@@ -1,16 +1,19 @@
+server:
+  port: ${PORT:8080}
+
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/CafeManager
-    username: postgres
-    password: 2898111
+    url: jdbc:postgresql://dpg-d2pfotur433s73d8jjhg-a.oregon-postgres.render.com:5432/cafemanagerdb
+    username: cafemanagerdb_user
+    password: FDvHEBJBOeK2AuF4RqbUpSDes6AxI4Vc
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
-    database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     properties:
-      hibernate.enable_lazy_load_no_trans: true
       hibernate:
         format_sql: true
+      hibernate.enable_lazy_load_no_trans: true
