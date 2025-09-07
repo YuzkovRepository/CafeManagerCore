@@ -42,6 +42,9 @@ public class Dish {
     @JoinColumn(name = "dish_category", nullable = false)
     private DishCategory dishCategory;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<>();
 

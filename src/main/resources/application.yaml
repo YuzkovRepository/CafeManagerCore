@@ -17,3 +17,7 @@ spring:
       hibernate:
         format_sql: true
       hibernate.enable_lazy_load_no_trans: true
+cloudinary:
+  cloud_name: dvgxdoljn
+  api_key: 483538944958214
+  api_secret: tGV9XVTFHU_n7iRjLEdTUVzyiPo

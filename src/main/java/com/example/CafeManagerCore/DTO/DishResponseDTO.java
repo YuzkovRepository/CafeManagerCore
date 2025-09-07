@@ -9,5 +9,6 @@ public record DishResponseDTO(
         BigDecimal cost,
         BigDecimal rating,
         BigDecimal discount,
-        String dishCategory
+        String dishCategory,
+        String imageBase64
 ) {}
