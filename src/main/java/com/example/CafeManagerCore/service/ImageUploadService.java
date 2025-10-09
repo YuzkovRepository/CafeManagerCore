@@ -30,31 +30,26 @@ public class ImageUploadService {
     }
 
     public byte[] downloadImage(String imageUrl) throws IOException {
-        // Извлекаем public_id из URL Cloudinary
         String publicId = extractPublicIdFromUrl(imageUrl);
         return downloadImageByPublicId(publicId);
     }
 
     private String extractPublicIdFromUrl(String imageUrl) {
         try {
-            // Пример URL: https://res.cloudinary.com/cloudname/image/upload/v123456789/folder/filename.jpg
             URL url = new URL(imageUrl);
             String path = url.getPath();
 
-            // Ищем часть после /upload/
             int uploadIndex = path.indexOf("/upload/");
             if (uploadIndex != -1) {
-                String afterUpload = path.substring(uploadIndex + 8); // +8 для пропуска "/upload/"
+                String afterUpload = path.substring(uploadIndex + 8);
 
-                // Убираем версию если есть (v123456789/)
-                if (afterUpload.startsWith("v")) {
+               if (afterUpload.startsWith("v")) {
                     int versionEnd = afterUpload.indexOf("/");
                     if (versionEnd != -1) {
                         afterUpload = afterUpload.substring(versionEnd + 1);
                     }
                 }
 
-                // Убираем расширение файла
                 int dotIndex = afterUpload.lastIndexOf(".");
                 if (dotIndex != -1) {
                     afterUpload = afterUpload.substring(0, dotIndex);
@@ -72,10 +67,8 @@ public class ImageUploadService {
 
     public byte[] downloadImageByPublicId(String publicId) throws IOException {
         try {
-            // Скачиваем изображение как byte array
             String url = cloudinary.url().generate(publicId);
 
-            // Альтернативный способ через API Cloudinary
             Map result = cloudinary.api().resource(publicId, ObjectUtils.emptyMap());
             String secureUrl = (String) result.get("secure_url");
 

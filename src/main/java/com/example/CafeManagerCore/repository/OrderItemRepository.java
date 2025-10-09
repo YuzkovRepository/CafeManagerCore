@@ -1,10 +1,9 @@
 package com.example.CafeManagerCore.repository;
 
-import com.example.CafeManagerCore.model.Guest;
+import com.example.CafeManagerCore.model.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GuestRepository extends JpaRepository<Guest, Long> {
-
+public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 }

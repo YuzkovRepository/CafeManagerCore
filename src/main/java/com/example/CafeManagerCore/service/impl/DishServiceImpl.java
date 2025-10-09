@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class DishServiceImpl implements DishService {
-    public final DishRepository dishRepository;
+    private final DishRepository dishRepository;
     private final DishCategoryRepository dishCategoryRepository;
     private final ImageUploadService imageUploadService;
     private static final Logger logger = LoggerFactory.getLogger(DishController.class);

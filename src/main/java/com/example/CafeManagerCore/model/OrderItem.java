@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Accessors(chain = true)
@@ -23,4 +25,19 @@ public class OrderItem {
     private Dish dish;
 
     private int count;
+
+    @Column(name = "unit_price", precision = 10, scale = 2, nullable = false)
+    private BigDecimal unitPrice;
+
+    public BigDecimal getTotalPrice() {
+        return unitPrice.multiply(BigDecimal.valueOf(count));
+    }
+
+    @PrePersist
+    protected void onPrePersist() {
+        if (unitPrice == null && dish != null) {
+            unitPrice = dish.getCost();
+        }
+    }
 }
+
