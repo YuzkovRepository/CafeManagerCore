@@ -4,6 +4,8 @@ import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
@@ -15,6 +17,8 @@ import java.util.Set;
 @Entity
 @Accessors(chain = true)
 @Table(name = "dishes")
+@ToString(exclude = {"orderItems", "dishCategory"}) // Исключаем все связи
+@EqualsAndHashCode(exclude = {"orderItems", "dishCategory"}) // Исключаем из equals/hashCode
 public class Dish {
     @Id
     @Column(name = "dish_id")
@@ -25,6 +29,9 @@ public class Dish {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @Column(name = "is_available", nullable = false, columnDefinition = "boolean default false")
+    private boolean isAvailable;
 
     @Digits(integer = 5, fraction = 2)
     @Column(precision = 7, scale = 2, nullable = false)
@@ -47,6 +54,9 @@ public class Dish {
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<>();
+
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<CartItem> cartItems = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {

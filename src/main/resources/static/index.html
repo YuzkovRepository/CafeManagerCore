@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Manager</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🍽️ Cafe Manager</h1>
+            <nav class="nav">
+                <button class="nav-btn active" data-tab="dishes">Меню</button>
+                <button class="nav-btn" data-tab="cart">Корзина</button>
+                <button class="nav-btn" data-tab="orders">Заказы</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Блок меню -->
+            <section id="dishes" class="tab-content active">
+                <h2>Наше меню</h2>
+                <div class="filters">
+                    <input type="text" id="searchDish" placeholder="Поиск блюд..." class="search-input">
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">Все категории</option>
+                    </select>
+                </div>
+                <div id="dishesList" class="dishes-grid"></div>
+            </section>
+
+            <!-- Блок корзины -->
+            <section id="cart" class="tab-content">
+                <h2>Ваша корзина</h2>
+                <div class="phone-section">
+                    <input type="tel" id="userPhone" placeholder="+79991234567" class="phone-input">
+                    <button id="createCartBtn" class="btn btn-primary">Создать корзину</button>
+                </div>
+                <div id="cartInfo" class="cart-info hidden">
+                    <div class="cart-header">
+                        <h3>Корзина #<span id="cartId"></span></h3>
+                        <div class="cart-total">
+                            Итого: <span id="cartTotal">0</span> ₽
+                        </div>
+                    </div>
+                    <div id="cartItems" class="cart-items"></div>
+                    <div class="cart-actions">
+                        <button id="createOrderBtn" class="btn btn-success">Оформить заказ</button>
+                        <button id="clearCartBtn" class="btn btn-danger">Очистить корзину</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Блок заказов -->
+            <section id="orders" class="tab-content">
+                <h2>Ваши заказы</h2>
+                <div class="phone-section">
+                    <input type="tel" id="orderPhone" placeholder="+79991234567" class="phone-input">
+                   <button id="loadOrdersBtn" class="btn btn-primary">Найти заказы</button>
+                </div>
+                <div id="ordersList" class="orders-list"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Модальное окно для добавления в корзину -->
+    <div id="addToCartModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Добавить в корзину</h3>
+            <div id="dishDetails"></div>
+            <div class="quantity-controls">
+                <button onclick="changeQuantity(-1)">-</button>
+                <span id="quantity">1</span>
+                <button onclick="changeQuantity(1)">+</button>
+            </div>
+            <button onclick="addToCart()" class="btn btn-primary">Добавить в корзину</button>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/dishes.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/orders.js"></script>
+</body>
+</html>

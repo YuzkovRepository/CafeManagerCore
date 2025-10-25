@@ -3,10 +3,14 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-d2pfotur433s73d8jjhg-a.oregon-postgres.render.com:5432/cafemanagerdb
-    username: cafemanagerdb_user
-    password: FDvHEBJBOeK2AuF4RqbUpSDes6AxI4Vc
+    url: jdbc:postgresql://localhost:5432/CafeManager
+    username: postgres
+    password: 2898111
     driver-class-name: org.postgresql.Driver
+
+  web:
+    resources:
+      static-locations: classpath:/static/
 
   jpa:
     hibernate:
@@ -21,3 +25,13 @@ cloudinary:
   cloud_name: dvgxdoljn
   api_key: 483538944958214
   api_secret: tGV9XVTFHU_n7iRjLEdTUVzyiPo
+
+logging:
+  level:
+    org.springframework.web.cors: DEBUG
+    org.springframework.web.servlet: DEBUG
+    com.yourpackage: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+  file:
+    name: C:\Users\serez\OneDrive\Документы\учеба\Проект Кафе аналитик\CafeManagerCore\logs\app.log

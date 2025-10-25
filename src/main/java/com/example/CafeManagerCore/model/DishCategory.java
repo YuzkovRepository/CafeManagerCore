@@ -3,6 +3,8 @@ package com.example.CafeManagerCore.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Entity
 @Accessors(chain = true)
 @Table(name = "dish_categories")
+@ToString(exclude = {"dishes"})
+@EqualsAndHashCode(exclude = {"dishes"})
 public class DishCategory {
     @Id
     @Column(name = "dish_category_id")

@@ -8,6 +8,6 @@ public record OrderResponseDTO (
     Long id,
     LocalDateTime dateTime,
     String status,
-    Long clientId,
+    Long guestId,
     BigDecimal totalAmount
 ){}
